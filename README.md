@@ -2,17 +2,18 @@
 **1. 两种模式**  
  
 - snowflake模式
- 图1：![leaf1.JPG](https://i.loli.net/2019/10/13/cr98SJtgfYsUjGy.jpg)
+
+ 	图1：![leaf1.JPG](https://i.loli.net/2019/10/13/cr98SJtgfYsUjGy.jpg)
             
         41位作为毫秒数，可以表示69年的时间( 1L<<41 /(365 *24 *3600 *1000 )
         10位表示机器id，也可以采用 数据id + 机器id
         12位自增序列号，需上锁
 
 - segment模式
-        
+        ![leaf3.jpg](https://i.loli.net/2019/10/13/tNS1zVrDcMgWPIL.jpg)
 		使用代理server批量(step决定数量大小)获取，减轻数据库读写压力
         各业务发号需求用tag字段区分，各类业务获取相互隔离
-        
+        ![leaf4.JPG](https://i.loli.net/2019/10/13/s1KSADuBJivL8gO.jpg)
 	
    
     leaf动态调整step
@@ -22,12 +23,13 @@
 
 	下一次号段nextstep长度调整策略:
         
- 	- T < 15min, nextstep = step * 2
+    - T < 15min, nextstep = step * 2
     - 15min < T < 30min, nextstep = step
     - T > 30min, nextstep = step / 2
     
 
 	双buffer优化：
+		![leaf2.JPG](https://i.loli.net/2019/10/13/hvuDGLgTRdIaqef.jpg)
     	
 	  	当号段消耗完时，这期间从DB取回号段，若并发量过大或者DB网络、性能不稳定，会造成发号阻塞。
 		为使得发号过程无阻塞，异步提前将下一个号段加载到内存中，而不必等到号码用尽再从DB中取。
