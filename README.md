@@ -10,9 +10,12 @@
         12位自增序列号，需上锁
 
 - segment模式
+
         ![leaf3.jpg](https://i.loli.net/2019/10/13/tNS1zVrDcMgWPIL.jpg)
+	
 		使用代理server批量(step决定数量大小)获取，减轻数据库读写压力
         各业务发号需求用tag字段区分，各类业务获取相互隔离
+	
         ![leaf4.JPG](https://i.loli.net/2019/10/13/s1KSADuBJivL8gO.jpg)
 	
    
@@ -29,6 +32,7 @@
     
 
 	双buffer优化：
+	
 		![leaf2.JPG](https://i.loli.net/2019/10/13/hvuDGLgTRdIaqef.jpg)
     	
 	  	当号段消耗完时，这期间从DB取回号段，若并发量过大或者DB网络、性能不稳定，会造成发号阻塞。
