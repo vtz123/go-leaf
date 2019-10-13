@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+
+package proto;
+
+
+service Greeter {
+  rpc Snowflake (SnowflakeRequest) returns (SnowflakeReply) {};
+  rpc Segment (SegmentRequest) returns (SegmentReply){};
+}
+
+
+message SnowflakeRequest {
+  int32 machineId = 1;
+}
+
+message SegmentRequest {
+  string biz_tag = 1;
+}
+
+
+message SnowflakeReply {
+  int32 Errno = 1;
+  string Mag = 2;
+  int64 Id = 3;
+}
+
+
+message SegmentReply {
+    int32 Errno = 1;
+    string Mag = 2;
+    int64 Id = 3;
+}
