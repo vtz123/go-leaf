@@ -2,7 +2,7 @@
 **1. 两种模式**  
  
 - snowflake模式
- 图1：
+ 图1：[url=https://sm.ms/image/cr98SJtgfYsUjGy][img]https://i.loli.net/2019/10/13/cr98SJtgfYsUjGy.jpg[/img][/url]
             
         41位作为毫秒数，可以表示69年的时间( 1L<<41 /(365 *24 *3600 *1000 )
         10位表示机器id，也可以采用 数据id + 机器id
