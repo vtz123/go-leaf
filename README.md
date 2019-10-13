@@ -1,23 +1,28 @@
-思路参考 Leaf：美团分布式ID生成服务开源https://tech.meituan.com/2019/03/07/open-source-project-leaf.html
+思路参考 
+Leaf：美团分布式ID生成服务开源https://tech.meituan.com/2019/03/07/open-source-project-leaf.html
+
 项目参考 美团开源Java版leaf  https://github.com/Meituan-Dianping/Leaf
+
 测试：
   - http基准测试， 测试工具：apache bench
-    命令1: 
-    go-leaf: ab -n 30000 -c 1000 http://localhost:8000/alloc-segment?biz_tag=test
-    美团leaf：ab -n 30000 -c 1000 http://localhost:8080/api/segment/get/leaf-segment-test
-    go leaf 
-  - 结果：  吞吐率             2845.22    	      1774.78
-  	   用户平均等待时间     351.4ms              563.4ms
-	   服务器平均等待时间   0.351ms               0.563ms
-	   TP99              375ms                  1168ms
-    命令2: 
-    go-leaf: ab -n 50000 -c 2000 http://localhost:8000/alloc-segment?biz_tag=test
-    美团leaf：ab -n 50000 -c 2000 http://localhost:8080/api/segment/get/leaf-segment-test
-    go leaf 
-  - 结果：  吞吐率             2715.99   	      1739.4
-  	   用户平均等待时间     736.38.4ms            1149.8ms
-	   服务器平均等待时间   0.368ms               0.575ms
-	   TP99              754ms                  11673s
+  
+        命令1
+	    go-leaf:    ab -n 30000 -c 1000 http://localhost:8000/alloc-segment?biz_tag=test
+	    美团leaf：   ab -n 30000 -c 1000 http://localhost:8080/api/segment/get/leaf-segment-test
+    	结果：              go-leaf            美团leaf
+        吞吐率              2845.22    	     1774.78 
+  	    用户平均等待时间     351.4ms             563.4ms
+	    服务器平均等待时间    0.351ms            0.563ms
+	    TP99                 375ms              1168ms
+
+     	命令2: 
+    	go-leaf:   ab -n 50000 -c 2000 http://localhost:8000/alloc-segment?biz_tag=test
+    	美团leaf：  ab -n 50000 -c 2000 http://localhost:8080/api/segment/get/leaf-segment-test                     
+        结果：              go-leaf             美团leaf
+		吞吐率              2715.99   	         1739.4
+  	    用户平均等待时间      736.38.4ms          1149.8ms
+	    服务器平均等待时间     0.368ms             0.575ms
+	    TP99                 754ms               11673s
 
 可见，go-leaf 比美团开源Java版 各项数据要领先
 	   
